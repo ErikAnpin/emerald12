@@ -2209,6 +2209,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 personality;
     u32 value;
     u16 checksum;
+    u32 iv30;
+    u32 iv31;
+    int ivRand;
 
     ZeroBoxMonData(boxMon);
 
@@ -2261,13 +2264,51 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     value = ITEM_POKE_BALL;
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
-    value = 31;
-    SetBoxMonData(boxMon, MON_DATA_HP_IV, &value);
-    SetBoxMonData(boxMon, MON_DATA_ATK_IV, &value);
-    SetBoxMonData(boxMon, MON_DATA_DEF_IV, &value);
-    SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &value);
-    SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &value);
-    SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &value);
+
+    //Ugly, but it works. Can get improved. (resetes12)
+    iv30 = 30;
+    iv31 = 31;
+    ivRand = (Random() % 2);
+    
+    if (ivRand == 1)
+        SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv30);
+    else if (ivRand == 0)
+        SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv31);
+
+    ivRand = (Random() % 2);
+
+    if (ivRand == 1)
+        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv30);
+    else if (ivRand == 0)
+        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv31);
+    
+    ivRand = (Random() % 2);
+
+    if (ivRand == 1)
+        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv30);
+    else if (ivRand == 0)
+        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv31);
+    
+    ivRand = (Random() % 2);
+
+    if (ivRand == 1)
+        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv30);
+    else if (ivRand == 0)
+        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv31);
+    
+    ivRand = (Random() % 2);
+
+    if (ivRand == 1)
+        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv30);
+    else if (ivRand == 0)
+        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv31);
+    
+    ivRand = (Random() % 2);
+
+    if (ivRand == 1)
+        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv30);
+    else if (ivRand == 0)
+        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv31);
 
     if (gSpeciesInfo[species].abilities[1])
     {
